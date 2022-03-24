@@ -34,6 +34,7 @@ export type UserData = {
 const AuthContext = createContext<IAuthContextData>({} as IAuthContextData);
 
 export const AuthProvider: React.FC = ({ children }) => {
+  // export function AuthProvider({ children }: any) {
   const navigate = useNavigate();
   const [token, setToken, removeToken] = useStorage('token');
   const [userData, setUserDataStorage, removeUserDagaStorage] =

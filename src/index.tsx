@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <BrowserRouter>
-    <Suspense fallback={<div />}>
+    <Suspense fallback={<h1>Loading App...</h1>}>
       <App />
     </Suspense>
   </BrowserRouter>,

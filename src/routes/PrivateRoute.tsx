@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { useRoutes } from 'react-router-dom';
-import Router from './index';
+import Router from './RouteObject';
 
 import AuthContext from '../contexts/Authentication';
 import useStorage from '../utils/localStorage/useStorage';

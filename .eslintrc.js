@@ -74,6 +74,23 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['warn'],
+    '@typescript-eslint/no-explicit-any': 'off',
+    // 'jsx-a11y/label-has-associated-control': [
+    //   'error',
+    //   {
+    //     required: {
+    //       some: ['nesting', 'id'],
+    //     },
+    //   },
+    // ],
+    // 'jsx-a11y/label-has-for': [
+    //   'error',
+    //   {
+    //     required: {
+    //       some: ['nesting', 'id'],
+    //     },
+    //   },
+    // ],
   },
   settings: {
     'import/resolver': {
