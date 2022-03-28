@@ -2,12 +2,12 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
 
-    @font-face { 
+    /* @font-face { 
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
     font-weight: normal;
-    src: url('/assets/fonts/OpenSans-Regular.ttf') format('truetype');
-    }
+    src: url('../assets/fonts/OpenSans-Regular.ttf') format('truetype');
+    } */
 
   * {
     margin: 0;

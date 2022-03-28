@@ -1,4 +1,17 @@
 @import '~antd/dist/antd.less';
+// @import url('assets/fonts/OpenSans-Regular.ttf');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+// @font-face {
+//   font-family: 'Open Sans', sans-serif;
+//   font-style: normal;
+//   font-weight: normal;
+//   src: url('./assets/fonts/OpenSans-Regular.ttf') format('truetype');
+// }
+
+* {
+  font-family: 'Open Sans', sans-serif;
+}
 
 .ant-menu-submenu-popup {
   display: none;
@@ -6,4 +19,51 @@
 
 .ant-menu-inline-collapsed-tooltip {
   display: none;
+}
+
+.d-flex {
+  display: flex !important;
+}
+.justify-content-between {
+  justify-content: space-between !important;
+}
+.align-items-center {
+  align-items: center !important;
+}
+
+// .app-container-holder {
+//   display: flex;
+//   flex-direction: column;
+//   /* height: calc(100vh - 80px); */
+//   width: 305px;
+//   /* overflow-y: auto; */
+// }
+
+// .ant-layout-content:first-child {
+//   margin-left: 40px !important;
+// }
+
+.app-container-header {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+}
+
+.app-container-header h3 {
+  margin: 0;
+}
+
+// .app-container-list {
+//   /* height: calc(100vh - 100px); */
+//   height: calc(100vh - 130px);
+//   overflow-y: auto;
+// }
+
+.mx-4 {
+  margin-left: 1.5em;
+  margin-right: 1.5em;
+}
+
+.m0 {
+  margin: 0 !important;
 }
