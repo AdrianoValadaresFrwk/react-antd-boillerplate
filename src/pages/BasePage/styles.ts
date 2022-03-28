@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { Button } from 'antd';
+import { theme, ThemeModel } from '../../styles/theme';
 
 export const MainContainer = styled.div`
   display: flex;
@@ -62,6 +64,29 @@ export const Img = styled.img`
   margin-right: 8px;
 `;
 
+export const HeaderUserName = styled.h1`
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 33px;
+  color: #333333;
+  margin-bottom: 0px;
+  margin-left: 8px;
+  margin-right: 8px;
+`;
+
+export const HeaderButton = styled(Button)`
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  text-transform: uppercase;
+  color: #b1d34b;
+  height: 40px;
+`;
+
 export const CardContainerHolder = styled.div`
   background-color: white;
   display: flex;
@@ -79,8 +104,6 @@ export const CardContainerHeader = styled.div`
     font-weight: 400;
     font-size: 14px;
     line-height: 19px;
-    /* display: flex;
-    align-items: center; */
     color: #333333;
     margin: 19px 24px;
   }
@@ -88,15 +111,30 @@ export const CardContainerHeader = styled.div`
 
 export const CardContainerList = styled.div`
   overflow-y: auto;
+  ::-webkit-scrollbar {
+    width: 0.3em;
+  }
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px #cfcfcf;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: ${theme.gray};
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #707070;
+  }
 `;
 
-export const AppCard = styled.div`
+export const AppCard = styled.div<ThemeModel>`
   padding: 16px;
   display: flex;
   flex-direction: column;
-  border: 1px solid #f5f6fa;
+  border: 1px solid
+    ${({ styled, theme }) => (styled === 'danger' ? theme[styled] : '#f5f6fa')};
   box-sizing: border-box;
   border-radius: 4px;
+  margin-bottom: 8px;
 
   .card-header {
     font-family: 'Open Sans';
@@ -119,7 +157,7 @@ export const AppCard = styled.div`
     margin-bottom: 16px;
   }
 
-  .start-end {
+  .card-sub-title {
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 400;
@@ -128,6 +166,24 @@ export const AppCard = styled.div`
     text-transform: uppercase;
     color: #454545;
     margin-left: 28px;
+  }
+
+  .card-sub-info {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 19px;
+    color: ${({ styled, theme }) =>
+      styled ? theme[styled] : '#454545'} !important;
+    margin-left: 12px;
+  }
+
+  div:last-child {
+    span.anticon {
+      color: ${({ styled, theme }) =>
+        styled ? theme[styled] : '#454545'} !important;
+    }
   }
 `;
 
@@ -147,4 +203,10 @@ export const AppTag = styled.div`
     line-height: 14px;
     color: #454545;
   }
+`;
+
+export const AppLogo = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 48px 0px;
 `;

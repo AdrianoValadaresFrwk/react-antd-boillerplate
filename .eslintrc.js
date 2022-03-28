@@ -29,17 +29,17 @@ module.exports = {
     camelcase: 'off',
     noImplicitAny: 'off',
     'import/no-unresolved': 'error',
-    '@typescript-eslint/naming-convention': [
-      'error',
-      {
-        selector: 'interface',
-        format: ['PascalCase'],
-        custom: {
-          regex: '^I[A-Z]',
-          match: true,
-        },
-      },
-    ],
+    // '@typescript-eslint/naming-convention': [
+    //   'error',
+    //   {
+    //     selector: 'interface',
+    //     format: ['PascalCase'],
+    //     custom: {
+    //       regex: '^I[A-Z]',
+    //       match: true,
+    //     },
+    //   },
+    // ],
     'class-methods-use-this': 'off',
     'import/prefer-default-export': 'off',
     'no-shadow': 'off',
@@ -75,22 +75,6 @@ module.exports = {
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['warn'],
     '@typescript-eslint/no-explicit-any': 'off',
-    // 'jsx-a11y/label-has-associated-control': [
-    //   'error',
-    //   {
-    //     required: {
-    //       some: ['nesting', 'id'],
-    //     },
-    //   },
-    // ],
-    // 'jsx-a11y/label-has-for': [
-    //   'error',
-    //   {
-    //     required: {
-    //       some: ['nesting', 'id'],
-    //     },
-    //   },
-    // ],
   },
   settings: {
     'import/resolver': {

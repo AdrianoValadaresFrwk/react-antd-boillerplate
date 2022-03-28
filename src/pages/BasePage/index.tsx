@@ -19,14 +19,21 @@ import {
   SettingOutlined,
   EllipsisOutlined,
   CarOutlined,
+  DownOutlined,
 } from '@ant-design/icons';
 import {
   AppCard,
+  AppLogo,
   AppTag,
   CardContainerHeader,
   CardContainerHolder,
   CardContainerList,
+  HeaderButton,
+  HeaderUserName,
 } from './styles';
+import { theme } from '../../styles/theme';
+import logo from '../../assets/img/unimed_aeromedica_logo.png';
+import { ColumnsCardData } from './mockedData';
 // import { Card } from 'antd';
 // import { Suspense } from 'react';
 // import { Outlet } from 'react-router-dom';
@@ -37,6 +44,7 @@ import {
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 const { Meta } = Card;
+const { Search } = Input;
 
 const BasePage = () => {
   const [state, setState] = useState<any>({ collapsed: false });
@@ -45,6 +53,8 @@ const BasePage = () => {
       return { ...oldState, collapsed };
     });
   };
+  const mockedData = ColumnsCardData;
+
   return (
     // <MainContainer>
     //   <ModalContainer />
@@ -59,12 +69,21 @@ const BasePage = () => {
     //   </Container>
     // </MainContainer>
     <Layout style={{ minHeight: '100vh' }}>
-      <Sider collapsible collapsed={state.collapsed} onCollapse={onCollapse}>
-        <div className="logo">
-          {/* <Image width={200} src={logo} /> */}
-          <span style={{ color: 'white' }}>Logo</span>
-        </div>
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+      <Sider
+        collapsible={false}
+        collapsed={state.collapsed}
+        onCollapse={onCollapse}
+        style={{ backgroundColor: `${theme.secondary}` }}
+      >
+        <AppLogo>
+          <Image src={logo} />
+        </AppLogo>
+        <Menu
+          theme="dark"
+          defaultSelectedKeys={['1']}
+          mode="inline"
+          style={{ backgroundColor: `${theme.secondary}` }}
+        >
           <Menu.Item key="1" icon={<PieChartOutlined />}>
             Option 1
           </Menu.Item>
@@ -87,18 +106,28 @@ const BasePage = () => {
       </Sider>
       <Layout className="site-layout">
         <Header
-          className="site-layout-background d-flex justify-content-between align-items-center"
-          style={{ padding: 0, backgroundColor: '#0A5F55 !important' }}
+          className="d-flex justify-content-between align-items-center"
+          style={{ backgroundColor: '#F5F5F5' }}
         >
-          <div className="d-flex justify-content-center align-items-center mx-2">
+          <div className="d-flex justify-content-center align-items-center">
             <Avatar icon={<UserOutlined />} />
-            <h3 className="ml-2 mb-0" style={{ color: 'white' }}>
-              User Name
-            </h3>
+            <HeaderUserName>User Name</HeaderUserName>
+            <DownOutlined
+              style={{ fontSize: '16px', color: `${theme.primary}` }}
+            />
           </div>
           <div className="d-flex justify-content-center align-items-center mx-2">
-            <Input placeholder="Basic usage" />
-            <Button type="primary">Primary Button</Button>
+            {/* <Input placeholder="Basic usage" /> */}
+            <Search
+              placeholder="input search text"
+              onSearch={(e) => {
+                console.log(e);
+              }}
+              style={{ width: 352, marginRight: 64 }}
+            />
+            <HeaderButton shape="round" type="primary">
+              Primary Button
+            </HeaderButton>
           </div>
         </Header>
         <Content
@@ -109,44 +138,56 @@ const BasePage = () => {
           }}
           className="d-flex"
         >
-          <CardContainerHolder>
-            <CardContainerHeader className="d-flex justify-content-between align-items-center">
-              <span>3 Novos atendimentos</span>
-              <Button>
-                <EllipsisOutlined
-                  className="m0"
-                  style={{ fontSize: '16px', color: '#0A5F55' }}
-                />
-              </Button>
-            </CardContainerHeader>
-            <CardContainerList>
-              <AppCard>
-                <div className="d-flex justify-content-between align-items-center">
-                  <div className="d-flex align-items-center">
-                    <UserOutlined />
-                    <span className="card-header">Flávio Mendes Campos</span>
-                  </div>
-                  <AppTag>
-                    <span>TTU</span>
-                  </AppTag>
-                </div>
-                <div>
-                  <span className="time-stamp">03 Dez • 7:44</span>
-                </div>
-                <div>
-                  <span className="start-end">Origem – destino</span>
-                </div>
-                <div className="d-flex">
-                  <div className="d-flex align-items-center">
-                    <CarOutlined />
-                    <span className="card-header">
-                      Cuiabá, MT – Salvador, BA
-                    </span>
-                  </div>
-                </div>
-              </AppCard>
-            </CardContainerList>
-          </CardContainerHolder>
+          {mockedData.map((columnItem) => {
+            return (
+              <CardContainerHolder key={columnItem.idx}>
+                <CardContainerHeader className="d-flex justify-content-between align-items-center">
+                  <span>{columnItem.columnName}</span>
+                  <Button style={{ border: '0px solid transparent' }}>
+                    <EllipsisOutlined
+                      className="m0"
+                      style={{ fontSize: '16px', color: `${theme.secondary}` }}
+                    />
+                  </Button>
+                </CardContainerHeader>
+                <CardContainerList>
+                  {columnItem.cards.map((cardItem) => {
+                    return (
+                      <AppCard key={cardItem.idx} styled={cardItem.style}>
+                        <div className="d-flex justify-content-between align-items-center">
+                          <div className="d-flex align-items-center">
+                            <UserOutlined />
+                            <span className="card-header">{cardItem.name}</span>
+                          </div>
+                          <AppTag>
+                            <span>{cardItem.tagInfo}</span>
+                          </AppTag>
+                        </div>
+                        <div>
+                          <span className="time-stamp">
+                            {cardItem.timeStamp}
+                          </span>
+                        </div>
+                        <div>
+                          <span className="card-sub-title">
+                            {cardItem.subTitle}
+                          </span>
+                        </div>
+                        <div className="d-flex">
+                          <div className="d-flex align-items-center">
+                            <CarOutlined />
+                            <span className="card-sub-info">
+                              {cardItem.subInfo}
+                            </span>
+                          </div>
+                        </div>
+                      </AppCard>
+                    );
+                  })}
+                </CardContainerList>
+              </CardContainerHolder>
+            );
+          })}
         </Content>
       </Layout>
     </Layout>
