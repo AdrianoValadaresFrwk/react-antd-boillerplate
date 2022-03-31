@@ -10,4 +10,5 @@ export const theme = {
   warning: '#F47920',
   success: '#18e683',
   gray: '#454545',
+  background: '#F5F5F5',
 };

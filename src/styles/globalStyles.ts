@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { theme } from './theme';
 
 const GlobalStyle = createGlobalStyle`
 
@@ -20,14 +21,14 @@ const GlobalStyle = createGlobalStyle`
     min-height: 100vh;
     overflow: hidden;
     font-family: 'Open Sans', sans-serif;
-    background: #F5F5F5;
+    background: ${theme.background};
   }
   button, input, optgroup, select, textarea {
     font-family: inherit;
   }
   body {
     -webkit-font-smoothing: antialiased !important;
-    background-color: #F5F5F5;
+    background-color: ${theme.background};
   }
   ol, ul {
     list-style: none;
@@ -53,12 +54,12 @@ const GlobalStyle = createGlobalStyle`
     content: '' !important;
   }
   .ant-input, .ant-input-affix-wrapper{
-    color: #0A5F55;
+    color: ${theme.secondary};
     border: 1px solid #fff;
     border-radius: 4px;
   }
   .ant-input-password-icon{
-    color: #0A5F55;
+    color: ${theme.secondary};
   }
   .ant-form-item-label label{
     font-family: 'Open Sans';
@@ -66,8 +67,32 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 400;
     font-size: 12px;
     line-height: 16px;
-    color: #454545;
+    color: ${theme.gray};
   }
+
+  .ant-collapse-borderless{
+    background-color: ${theme.background} !important;
+  }
+
+  .ant-collapse-item{
+    background-color: white !important;
+    border-radius: 6px;
+  }
+
+  .ant-collapse-header{
+    justify-content: space-between;
+    height:87px !important;
+    align-items: center !important;
+  }
+
+  [data-theme='compact'] .site-collapse-custom-collapse .site-collapse-custom-panel,
+.site-collapse-custom-collapse .site-collapse-custom-panel {
+  margin-bottom: 24px;
+  overflow: hidden;
+  background: ${theme.background};
+  border: 0px;
+  border-radius: 2px;
+}
 `;
 
 export default GlobalStyle;

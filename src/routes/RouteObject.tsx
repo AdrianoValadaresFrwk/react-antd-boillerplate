@@ -4,6 +4,8 @@ import type { RouteObject } from 'react-router-dom';
 
 const BasePage = lazy(() => import('../pages/BasePage'));
 const Painel = lazy(() => import('../pages/Panel'));
+const MissionPage = lazy(() => import('../pages/MissionPage'));
+const NewQuotationPage = lazy(() => import('../pages/NewQuotationPage'));
 const Login = lazy(() => import('../pages/Login'));
 
 const Router = (logged: boolean, token: string): RouteObject[] => [
@@ -13,7 +15,12 @@ const Router = (logged: boolean, token: string): RouteObject[] => [
     children: [
       {
         path: '/',
-        element: <Painel />,
+        element: <MissionPage />,
+      },
+      {
+        path: '/new-quotation',
+        // element: <Painel />,
+        element: <NewQuotationPage />,
       },
     ],
   },
