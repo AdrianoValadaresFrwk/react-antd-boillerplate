@@ -4,11 +4,26 @@ import {
   LeftOutlined,
   CaretRightOutlined,
 } from '@ant-design/icons';
-import { Avatar, Input, Layout, Collapse, Button } from 'antd';
+import {
+  Avatar,
+  Input,
+  Layout,
+  Collapse,
+  Button,
+  Form,
+  Image,
+  Table,
+  Progress,
+  Divider,
+} from 'antd';
 import { useNavigate } from 'react-router-dom';
 import PanelHeader from './components/PanelHeader';
 import { theme } from '../../styles/theme';
 import { HeaderButton, HeaderUserName } from '../BasePage/styles';
+import { FormHolder } from '../Login/styles';
+import ClientForm from './components/ClientForm';
+import RouteForm from './components/RouteForm';
+import AirComplementForm from './components/AirComplementForm';
 
 const { Header, Content } = Layout;
 const { Search } = Input;
@@ -21,6 +36,38 @@ const text = `
 
 export default function NewQuotation() {
   const navigate = useNavigate();
+  const dataSource = [
+    {
+      key: '1',
+      name: 'Mike',
+      age: 32,
+      address: '10 Downing Street',
+    },
+    {
+      key: '2',
+      name: 'John',
+      age: 42,
+      address: '10 Downing Street',
+    },
+  ];
+
+  const columns = [
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name',
+    },
+    {
+      title: 'Age',
+      dataIndex: 'age',
+      key: 'age',
+    },
+    {
+      title: 'Address',
+      dataIndex: 'address',
+      key: 'address',
+    },
+  ];
   return (
     <Layout className="site-layout">
       <Header
@@ -93,7 +140,7 @@ export default function NewQuotation() {
               key="1"
               className="site-collapse-custom-panel"
             >
-              <p>{text}</p>
+              <ClientForm />
             </Panel>
             <Panel
               showArrow={false}
@@ -101,7 +148,7 @@ export default function NewQuotation() {
               key="2"
               className="site-collapse-custom-panel"
             >
-              <p>{text}</p>
+              <RouteForm />
             </Panel>
             <Panel
               showArrow={false}
@@ -109,9 +156,80 @@ export default function NewQuotation() {
               key="3"
               className="site-collapse-custom-panel"
             >
-              <p>{text}</p>
+              <AirComplementForm />
             </Panel>
           </Collapse>
+        </div>
+        <div style={{ width: '50%' }}>
+          <div className="d-flex" style={{ flexDirection: 'column' }}>
+            <div className="d-flex" style={{ flexDirection: 'column' }}>
+              <div className="d-flex justify-content-between">
+                <span>Nova cotação</span>
+                <span>Missão</span>
+              </div>
+              <Progress percent={10} showInfo={false} />
+            </div>
+            <Divider />
+            <div className="d-flex">
+              <Avatar src="https://joeschmoe.io/api/v1/random" />
+              <Avatar
+                src={
+                  <Image
+                    src="https://joeschmoe.io/api/v1/random"
+                    style={{ width: 32 }}
+                  />
+                }
+              />
+              <Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>
+                U
+              </Avatar>
+              <div
+                className="d-flex"
+                style={{ flexDirection: 'column', marginLeft: 28 }}
+              >
+                <span>Pessoas envolvidas</span>
+                <span>
+                  Fábio Nazaré Vieira(NLOT), Gisele Freitas(GMD), Joana
+                  Magalhães(GMD)
+                </span>
+              </div>
+            </div>
+            <Divider />
+            <div
+              className="d-flex"
+              style={{ justifyContent: 'space-evenly', marginBottom: 24 }}
+            >
+              <div className="d-flex" style={{ flexDirection: 'column' }}>
+                <span>Paciente</span>
+                <span>Flávio Mendes Campos</span>
+              </div>
+              <div className="d-flex" style={{ flexDirection: 'column' }}>
+                <span>Tipo cliente</span>
+                <span>Unimed Aeromédica</span>
+              </div>
+            </div>
+            <div className="d-flex" style={{ justifyContent: 'space-evenly' }}>
+              <div className="d-flex" style={{ flexDirection: 'column' }}>
+                <span>Paciente</span>
+                <span>Flávio Mendes Campos</span>
+              </div>
+              <div className="d-flex" style={{ flexDirection: 'column' }}>
+                <span>Tipo cliente</span>
+                <span>Unimed Aeromédica</span>
+              </div>
+              <div className="d-flex" style={{ flexDirection: 'column' }}>
+                <span>Tipo cliente</span>
+                <span>Unimed Aeromédica</span>
+              </div>
+            </div>
+            <Divider />
+            <span>Percurso aéreo</span>
+            <Table dataSource={dataSource} columns={columns} />
+            <div className="d-flex" style={{ justifyContent: 'space-between' }}>
+              <Button type="primary">Compartilhar</Button>
+              <Button type="primary">Montar Rota</Button>
+            </div>
+          </div>
         </div>
       </Content>
     </Layout>

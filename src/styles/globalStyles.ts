@@ -45,6 +45,20 @@ const GlobalStyle = createGlobalStyle`
     content: none;
   }
 
+  ::-webkit-scrollbar {
+    width: 0.5em;
+  }
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px #cfcfcf;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: ${theme.gray};
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #707070;
+  }
+
   @media (max-width: 768px) {
     .remove-from-sm-screen{
       display: none;
