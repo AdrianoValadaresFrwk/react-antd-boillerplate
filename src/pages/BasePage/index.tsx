@@ -25,6 +25,19 @@ const BasePage = () => {
     });
   };
 
+  const roles = {
+    user: {
+      incluir: true,
+      alterar: false,
+      exluir: false,
+    },
+    ambulancia: {
+      incluir: true,
+      alterar: true,
+      exluir: true,
+    },
+  };
+
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider
@@ -45,14 +58,20 @@ const BasePage = () => {
           <Menu.Item key="1" icon={<PieChartOutlined />}>
             Option 1
           </Menu.Item>
-          <Menu.Item key="2" icon={<DesktopOutlined />}>
-            Option 2
-          </Menu.Item>
-          <SubMenu key="sub1" icon={<UserOutlined />} title="Userr">
-            <Menu.Item key="3">Tomm</Menu.Item>
-            <Menu.Item key="4">Bill</Menu.Item>
-            <Menu.Item key="5">Alex</Menu.Item>
-          </SubMenu>
+          {roles.ambulancia.incluir ? (
+            <Menu.Item key="2" icon={<DesktopOutlined />}>
+              Option 2
+            </Menu.Item>
+          ) : null}
+          {roles.user.alterar ? (
+            <SubMenu key="sub1" icon={<UserOutlined />} title="User">
+              <Menu.Item key="3">Tomm</Menu.Item>
+              <Menu.Item key="4">Bill</Menu.Item>
+              {roles.user.exluir ? (
+                <Menu.Item key="5">Excluir</Menu.Item>
+              ) : null}
+            </SubMenu>
+          ) : null}
           <SubMenu key="sub2" icon={<TeamOutlined />} title="Team">
             <Menu.Item key="6">Team 1</Menu.Item>
             <Menu.Item key="8">Team 2</Menu.Item>

@@ -39,5 +39,8 @@ export const FormItemWithDropDown = styled(Form.Item)`
   }
   .doropdown-container {
     flex-direction: column;
+    .ant-select-selector {
+      border-radius: 4px;
+    }
   }
 `;

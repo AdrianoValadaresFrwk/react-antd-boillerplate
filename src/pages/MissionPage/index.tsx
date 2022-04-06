@@ -61,6 +61,7 @@ export default function MissionPage() {
           padding: '16px 36px',
           overflowX: 'auto',
           height: 'calc(100vh - 130px)',
+          backgroundColor: theme.background,
         }}
         className="d-flex"
       >

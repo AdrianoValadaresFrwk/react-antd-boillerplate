@@ -107,6 +107,10 @@ const GlobalStyle = createGlobalStyle`
   border: 0px;
   border-radius: 2px;
 }
+
+.ant-progress-inner{
+  background-color:white
+}
 `;
 
 export default GlobalStyle;
