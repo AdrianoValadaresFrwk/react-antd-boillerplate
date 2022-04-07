@@ -1,6 +1,7 @@
 import { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 import type { RouteObject } from 'react-router-dom';
+import ExecuteGuard from './Guard';
 
 const BasePage = lazy(() => import('../pages/BasePage'));
 const Painel = lazy(() => import('../pages/Panel'));
@@ -8,10 +9,11 @@ const MissionPage = lazy(() => import('../pages/MissionPage'));
 const NewQuotationPage = lazy(() => import('../pages/NewQuotationPage'));
 const Login = lazy(() => import('../pages/Login'));
 
-const Router = (logged: boolean, token: string): RouteObject[] => [
+const RouterObject = (logged: boolean, token: string): RouteObject[] => [
   {
     path: '/',
-    element: logged || token ? <BasePage /> : <Navigate to="login" />,
+    // element: logged || token ? <BasePage /> : <Navigate to="login" />,
+    element: ExecuteGuard('/', { logged, token }),
     children: [
       {
         path: '/',
@@ -22,10 +24,14 @@ const Router = (logged: boolean, token: string): RouteObject[] => [
         // element: <Painel />,
         element: <NewQuotationPage />,
       },
+      {
+        path: '/access-profiles',
+        element: ExecuteGuard('/access-profiles', ''),
+      },
     ],
   },
   { path: 'login', element: <Login /> },
   { path: '*', element: <Navigate to="/" /> },
 ];
 
-export default Router;
+export default RouterObject;

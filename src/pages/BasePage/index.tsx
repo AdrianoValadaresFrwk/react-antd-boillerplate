@@ -1,5 +1,5 @@
 import { Suspense, useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, Link } from 'react-router-dom';
 import { Layout, Menu, Avatar, Input, Image } from 'antd';
 import {
   DesktopOutlined,
@@ -39,6 +39,7 @@ const BasePage = () => {
   };
 
   return (
+    // Cadastro -> Administração -> Controle de Acessos -> Perfis de Acesso
     <Layout style={{ minHeight: '100vh' }}>
       <Sider
         collapsible={false}
@@ -51,12 +52,12 @@ const BasePage = () => {
         </AppLogo>
         <Menu
           theme="dark"
-          defaultSelectedKeys={['1']}
+          defaultSelectedKeys={[location.pathname]}
           mode="inline"
           style={{ backgroundColor: `${theme.secondary}` }}
         >
-          <Menu.Item key="1" icon={<PieChartOutlined />}>
-            Option 1
+          <Menu.Item key="/" icon={<PieChartOutlined />}>
+            <Link to="/"> Início</Link>
           </Menu.Item>
           {roles.ambulancia.incluir ? (
             <Menu.Item key="2" icon={<DesktopOutlined />}>
@@ -72,13 +73,16 @@ const BasePage = () => {
               ) : null}
             </SubMenu>
           ) : null}
-          <SubMenu key="sub2" icon={<TeamOutlined />} title="Team">
+          <Menu.Item key="/access-profiles" icon={<FileOutlined />}>
+            <Link to="/access-profiles"> Perfis de Acesso</Link>
+          </Menu.Item>
+          {/* <SubMenu key="sub2" icon={<TeamOutlined />} title="Perfis de Acesso">
             <Menu.Item key="6">Team 1</Menu.Item>
             <Menu.Item key="8">Team 2</Menu.Item>
-          </SubMenu>
-          <Menu.Item key="9" icon={<FileOutlined />}>
+          </SubMenu> */}
+          {/* <Menu.Item key="9" icon={<FileOutlined />}>
             Files
-          </Menu.Item>
+          </Menu.Item> */}
         </Menu>
       </Sider>
       <Suspense fallback={<div />}>

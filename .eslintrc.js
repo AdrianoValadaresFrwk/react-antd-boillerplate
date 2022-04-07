@@ -76,6 +76,7 @@ module.exports = {
     '@typescript-eslint/no-use-before-define': ['warn'],
     '@typescript-eslint/no-explicit-any': 'off',
     'no-restricted-globals': 'off',
+    'no-case-declarations': 'off',
   },
   settings: {
     'import/resolver': {
