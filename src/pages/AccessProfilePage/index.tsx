@@ -9,6 +9,8 @@ import {
 } from '@ant-design/icons';
 import { theme } from '../../styles/theme';
 import { ColumnsCardData } from '../BasePage/mockedData';
+import { dataSource, columns } from './MockedData';
+import { TableComponent } from './styles';
 import { HeaderButton, HeaderUserName } from '../BasePage/styles';
 
 const { Header, Content } = Layout;
@@ -105,7 +107,7 @@ export default function AccessProfilePage() {
             </Form.Item>
           </Form>
         </div>
-        <div style={{ backgroundColor: 'blue' }}>2</div>
+        <TableComponent dataSource={dataSource} columns={columns} pagination={{ position: ['bottomLeft'] }} />
       </Content>
     </Layout>
   );

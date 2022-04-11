@@ -62,7 +62,8 @@ module.exports = {
         devDependencies: ['**/*.spec.js'],
       },
     ],
-    'prettier/prettier': ['error', { singleQuote: true }],
+    // 'prettier/prettier': ['error', { singleQuote: true }],
+    'prettier/prettier': 'off',
     'react/jsx-filename-extension': [
       1,
       {
