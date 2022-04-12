@@ -21,25 +21,16 @@ export default function AccessProfilePage() {
       title: 'Código',
       dataIndex: 'cod',
       key: 'cod',
-      onCell: (r, ri) => {
-        console.log(r, ri);
-      },
     },
     {
       title: 'Descrição',
       dataIndex: 'description',
       key: 'description',
-      onCell: (r, ri) => {
-        console.log(r, ri);
-      },
     },
     {
       title: ' ',
       dataIndex: 'actions',
       key: 'actions',
-      onCell: (r, ri) => {
-        console.log(r, ri);
-      },
       render: () => (
         <div className="action-icons">
           <EditOutlined
