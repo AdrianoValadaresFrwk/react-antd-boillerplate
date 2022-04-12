@@ -146,6 +146,13 @@ export default function AccessProfilePage() {
           onChange={(e) => {
             console.log(e);
           }}
+          onRow={(record, rowIndex) => {
+            return {
+              onClick: (event) => {
+                console.log(record, rowIndex, event);
+              },
+            };
+          }}
         />
       </Content>
     </Layout>
