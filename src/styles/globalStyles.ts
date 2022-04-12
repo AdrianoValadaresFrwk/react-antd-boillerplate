@@ -111,6 +111,16 @@ const GlobalStyle = createGlobalStyle`
 .ant-progress-inner{
   background-color:white
 }
+
+.app-modal {
+  .ant-modal-content,
+  .ant-modal-header {
+    border-radius: 4px;
+  }
+  .ant-modal-body{
+    background-color: ${theme.background};
+  }
+}
 `;
 
 export default GlobalStyle;

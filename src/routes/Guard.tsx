@@ -4,6 +4,7 @@ import { Navigate } from 'react-router-dom';
 const BasePage = lazy(() => import('../pages/BasePage'));
 const Painel = lazy(() => import('../pages/Panel'));
 const AccessProfilePage = lazy(() => import('../pages/AccessProfilePage'));
+const FunctionsPage = lazy(() => import('../pages/FunctionsPage'));
 
 export default function ExecuteGuard(rule: string, params?: any): JSX.Element {
   switch (rule) {
@@ -12,6 +13,8 @@ export default function ExecuteGuard(rule: string, params?: any): JSX.Element {
       return logged || token ? <BasePage /> : <Navigate to="login" />;
     case '/access-profiles':
       return <AccessProfilePage />;
+    case '/functions':
+      return <FunctionsPage />;
 
     default:
       console.log('executeGuard');

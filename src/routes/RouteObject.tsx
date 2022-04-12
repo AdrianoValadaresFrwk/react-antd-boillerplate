@@ -3,8 +3,6 @@ import { Navigate } from 'react-router-dom';
 import type { RouteObject } from 'react-router-dom';
 import ExecuteGuard from './Guard';
 
-const BasePage = lazy(() => import('../pages/BasePage'));
-const Painel = lazy(() => import('../pages/Panel'));
 const MissionPage = lazy(() => import('../pages/MissionPage'));
 const NewQuotationPage = lazy(() => import('../pages/NewQuotationPage'));
 const Login = lazy(() => import('../pages/Login'));
@@ -27,6 +25,10 @@ const RouterObject = (logged: boolean, token: string): RouteObject[] => [
       {
         path: '/access-profiles',
         element: ExecuteGuard('/access-profiles', ''),
+      },
+      {
+        path: '/functions',
+        element: ExecuteGuard('/functions', ''),
       },
     ],
   },

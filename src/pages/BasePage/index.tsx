@@ -39,7 +39,7 @@ const BasePage = () => {
     },
   };
 
-  const content = (
+  const administrationMenu = (
     <div>
       <Menu
         onClick={(e) => {
@@ -51,22 +51,26 @@ const BasePage = () => {
         mode="inline"
         theme="dark"
       >
-        <SubMenu key="sub1" icon={<MailOutlined />} title="Controle de Acessos">
+        <SubMenu
+          key="/access-control"
+          icon={<MailOutlined />}
+          title="Controle de Acessos"
+        >
           <Menu.Item key="/access-profiles" icon={<FileOutlined />}>
             <Link to="/access-profiles">Perfis de Acesso</Link>
           </Menu.Item>
           <Menu.Item key="/users" icon={<FileOutlined />}>
-            <Link to="/access-profiles">Usuários</Link>
+            <Link to="/">Usuários</Link>
           </Menu.Item>
         </SubMenu>
         <Menu.Item key="/cities" icon={<FileOutlined />}>
-          <Link to="/access-profiles">Cidade</Link>
+          <Link to="/">Cidade</Link>
         </Menu.Item>
         <Menu.Item key="/functions" icon={<FileOutlined />}>
-          <Link to="/access-profiles">Funções</Link>
+          <Link to="/functions">Funções</Link>
         </Menu.Item>
         <Menu.Item key="/pg" icon={<FileOutlined />}>
-          <Link to="/access-profiles">Parametros Gerais</Link>
+          <Link to="/">Parametros Gerais</Link>
         </Menu.Item>
       </Menu>
     </div>
@@ -112,7 +116,11 @@ const BasePage = () => {
           </Menu.Item> */}
           <SubMenu key="sub10" icon={<MailOutlined />} title="Cadastro">
             <Menu.Item key="a2">
-              <Popover placement="right" content={content} trigger="hover">
+              <Popover
+                placement="right"
+                content={administrationMenu}
+                trigger="hover"
+              >
                 Administração
               </Popover>
             </Menu.Item>
