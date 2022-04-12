@@ -1,6 +1,6 @@
 import { Suspense, useState } from 'react';
 import { Outlet, useNavigate, Link } from 'react-router-dom';
-import { Layout, Menu, Avatar, Input, Image } from 'antd';
+import { Layout, Menu, Avatar, Input, Image, Popover, Button } from 'antd';
 import {
   DesktopOutlined,
   PieChartOutlined,
@@ -8,6 +8,7 @@ import {
   TeamOutlined,
   UserOutlined,
   DownOutlined,
+  MailOutlined,
 } from '@ant-design/icons';
 import { AppLogo, HeaderButton, HeaderUserName } from './styles';
 import { theme } from '../../styles/theme';
@@ -37,6 +38,39 @@ const BasePage = () => {
       exluir: true,
     },
   };
+
+  const content = (
+    <div>
+      <Menu
+        onClick={(e) => {
+          console.log(e);
+        }}
+        style={{ backgroundColor: `${theme.secondary}` }}
+        defaultOpenKeys={['sub1']}
+        selectedKeys={['current']}
+        mode="inline"
+        theme="dark"
+      >
+        <SubMenu key="sub1" icon={<MailOutlined />} title="Controle de Acessos">
+          <Menu.Item key="/access-profiles" icon={<FileOutlined />}>
+            <Link to="/access-profiles">Perfis de Acesso</Link>
+          </Menu.Item>
+          <Menu.Item key="/users" icon={<FileOutlined />}>
+            <Link to="/access-profiles">Usuários</Link>
+          </Menu.Item>
+        </SubMenu>
+        <Menu.Item key="/cities" icon={<FileOutlined />}>
+          <Link to="/access-profiles">Cidade</Link>
+        </Menu.Item>
+        <Menu.Item key="/functions" icon={<FileOutlined />}>
+          <Link to="/access-profiles">Funções</Link>
+        </Menu.Item>
+        <Menu.Item key="/pg" icon={<FileOutlined />}>
+          <Link to="/access-profiles">Parametros Gerais</Link>
+        </Menu.Item>
+      </Menu>
+    </div>
+  );
 
   return (
     // Cadastro -> Administração -> Controle de Acessos -> Perfis de Acesso
@@ -76,13 +110,17 @@ const BasePage = () => {
           <Menu.Item key="/access-profiles" icon={<FileOutlined />}>
             <Link to="/access-profiles"> Perfis de Acesso</Link>
           </Menu.Item>
-          {/* <SubMenu key="sub2" icon={<TeamOutlined />} title="Perfis de Acesso">
-            <Menu.Item key="6">Team 1</Menu.Item>
-            <Menu.Item key="8">Team 2</Menu.Item>
-          </SubMenu> */}
-          {/* <Menu.Item key="9" icon={<FileOutlined />}>
-            Files
-          </Menu.Item> */}
+          <SubMenu key="sub10" icon={<MailOutlined />} title="Cadastro">
+            <Menu.Item key="a2">
+              <Popover placement="right" content={content} trigger="hover">
+                Administração
+              </Popover>
+            </Menu.Item>
+            <Menu.Item key="a1">Clientes</Menu.Item>
+            <Menu.Item key="a3">Contratantes</Menu.Item>
+            <Menu.Item key="a4">Gestão Médica</Menu.Item>
+            <Menu.Item key="a5">Gestão operacional</Menu.Item>
+          </SubMenu>
         </Menu>
       </Sider>
       <Suspense fallback={<div />}>
