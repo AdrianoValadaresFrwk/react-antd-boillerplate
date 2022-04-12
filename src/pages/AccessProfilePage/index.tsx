@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Layout, Button, Input, Avatar, Divider, Form } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -15,6 +16,7 @@ const { Header, Content } = Layout;
 const { Search } = Input;
 
 export default function AccessProfilePage() {
+  const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const navigate = useNavigate();
   const columns = [
     {
@@ -35,14 +37,16 @@ export default function AccessProfilePage() {
         <div className="action-icons">
           <EditOutlined
             style={{ fontSize: '20px' }}
-            onClick={(e) => {
-              console.log(e);
+            onClick={() => {
+              console.log('Editar', selectedIndex);
+              console.log(dataSource[selectedIndex]);
             }}
           />
           <DeleteOutlined
             style={{ fontSize: '20px' }}
-            onClick={(e) => {
-              console.log(e);
+            onClick={() => {
+              console.log('Excluir', selectedIndex);
+              console.log(dataSource[selectedIndex]);
             }}
           />
         </div>
@@ -148,8 +152,8 @@ export default function AccessProfilePage() {
           }}
           onRow={(record, rowIndex) => {
             return {
-              onClick: (event) => {
-                console.log(record, rowIndex, event);
+              onMouseEnter: (event) => {
+                setSelectedIndex(rowIndex as number);
               },
             };
           }}
