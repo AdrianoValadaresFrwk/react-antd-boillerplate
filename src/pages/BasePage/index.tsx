@@ -107,9 +107,9 @@ const BasePage = () => {
               ) : null}
             </SubMenu>
           ) : null}
-          <Menu.Item key="/access-profiles" icon={<FileOutlined />}>
+          {/* <Menu.Item key="/access-profiles" icon={<FileOutlined />}>
             <Link to="/access-profiles"> Perfis de Acesso</Link>
-          </Menu.Item>
+          </Menu.Item> */}
           <SubMenu key="sub10" icon={<MailOutlined />} title="Cadastro">
             <Menu.Item key="a2">
               <Popover placement="right" content={content} trigger="hover">

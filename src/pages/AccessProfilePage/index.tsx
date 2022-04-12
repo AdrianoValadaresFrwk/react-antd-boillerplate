@@ -2,14 +2,12 @@ import { Layout, Button, Input, Avatar, Divider, Form } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import {
   UserOutlined,
-  EllipsisOutlined,
-  CarOutlined,
   DownOutlined,
-  LeftOutlined,
+  DeleteOutlined,
+  EditOutlined,
 } from '@ant-design/icons';
 import { theme } from '../../styles/theme';
-import { ColumnsCardData } from '../BasePage/mockedData';
-import { dataSource, columns } from './MockedData';
+import { dataSource } from './MockedData';
 import { TableComponent } from './styles';
 import { HeaderButton, HeaderUserName } from '../BasePage/styles';
 
@@ -18,6 +16,49 @@ const { Search } = Input;
 
 export default function AccessProfilePage() {
   const navigate = useNavigate();
+  const columns = [
+    {
+      title: 'Código',
+      dataIndex: 'cod',
+      key: 'cod',
+      onCell: (r, ri) => {
+        console.log(r, ri);
+      },
+    },
+    {
+      title: 'Descrição',
+      dataIndex: 'description',
+      key: 'description',
+      onCell: (r, ri) => {
+        console.log(r, ri);
+      },
+    },
+    {
+      title: ' ',
+      dataIndex: 'actions',
+      key: 'actions',
+      onCell: (r, ri) => {
+        console.log(r, ri);
+      },
+      render: () => (
+        <div className="action-icons">
+          <EditOutlined
+            style={{ fontSize: '20px' }}
+            onClick={(e) => {
+              console.log(e);
+            }}
+          />
+          <DeleteOutlined
+            style={{ fontSize: '20px' }}
+            onClick={(e) => {
+              console.log(e);
+            }}
+          />
+        </div>
+      ),
+    },
+  ];
+
   return (
     <Layout className="site-layout">
       <Header
@@ -107,7 +148,14 @@ export default function AccessProfilePage() {
             </Form.Item>
           </Form>
         </div>
-        <TableComponent dataSource={dataSource} columns={columns} pagination={{ position: ['bottomLeft'] }} />
+        <TableComponent
+          dataSource={dataSource}
+          columns={columns as any}
+          pagination={{ position: ['bottomLeft'] }}
+          onChange={(e) => {
+            console.log(e);
+          }}
+        />
       </Content>
     </Layout>
   );
