@@ -7,6 +7,7 @@ import {
   DeleteOutlined,
   EditOutlined,
 } from '@ant-design/icons';
+import Modal from './Modal';
 import { theme } from '../../styles/theme';
 import { dataSource } from './MockedData';
 import { TableComponent } from './styles';
@@ -19,12 +20,28 @@ export default function AccessProfilePage() {
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const [codSearch, setCodSearch] = useState<string>('');
   const [descSearch, setDescSearch] = useState<string>('');
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+
 
   const filteredDataSource = useMemo(() => dataSource.filter((item) => {
     const cod = item.cod.toString().includes(codSearch);
     const desc = item.description?.toLowerCase().includes(descSearch?.toLowerCase());
     return cod || desc;
   }), [dataSource, codSearch, descSearch]);
+
+
+  function showModal () {
+    setIsModalVisible(true);
+  };
+
+    
+  function handleOk () {
+    setIsModalVisible(false);
+  };
+
+  function handleCancel () {
+    setIsModalVisible(false);
+  };
 
   const navigate = useNavigate();
   const columns = [
@@ -147,12 +164,17 @@ export default function AccessProfilePage() {
                 <Button type="primary" shape="round" htmlType="submit">
                   Pesquisar
                 </Button>
-                <Button type="primary" shape="round" style={{ marginLeft: 24 }}>
+                <Button type="primary" shape="round" style={{ marginLeft: 24 }} onClick={showModal}>
                   Novo
                 </Button>
               </div>
             </Form.Item>
           </Form>
+          <Modal
+          visible={isModalVisible}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          />
         </div>
         <TableComponent
           dataSource={filteredDataSource}
