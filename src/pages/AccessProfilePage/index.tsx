@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Layout, Button, Input, Avatar, Divider, Form } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -17,6 +17,15 @@ const { Search } = Input;
 
 export default function AccessProfilePage() {
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
+  const [codSearch, setCodSearch] = useState<string>('');
+  const [descSearch, setDescSearch] = useState<string>('');
+
+  const filteredDataSource = useMemo(() => dataSource.filter((item) => {
+    const cod = item.cod.toString().includes(codSearch);
+    const desc = item.description?.toLowerCase().includes(descSearch?.toLowerCase());
+    return cod || desc;
+  }), [dataSource, codSearch, descSearch]);
+
   const navigate = useNavigate();
   const columns = [
     {
@@ -53,6 +62,7 @@ export default function AccessProfilePage() {
       ),
     },
   ];
+
 
   return (
     <Layout className="site-layout">
@@ -104,7 +114,8 @@ export default function AccessProfilePage() {
             wrapperCol={{ span: 24 }}
             initialValues={{ remember: true }}
             onFinish={(e) => {
-              console.log('finish', e);
+              setCodSearch(e.code);
+              setDescSearch(e.description);
             }}
             onFinishFailed={(e) => {
               console.log('fail', e);
@@ -115,7 +126,7 @@ export default function AccessProfilePage() {
               label="Código"
               name="code"
               rules={[
-                { required: true, message: 'Please input your username!' },
+                { required: false, message: 'Please input your username!' },
               ]}
             >
               <Input />
@@ -125,7 +136,7 @@ export default function AccessProfilePage() {
               label="Descrição"
               name="description"
               rules={[
-                { required: true, message: 'Please input your username!' },
+                { required: false, message: 'Please input your username!' },
               ]}
             >
               <Input />
@@ -144,7 +155,7 @@ export default function AccessProfilePage() {
           </Form>
         </div>
         <TableComponent
-          dataSource={dataSource}
+          dataSource={filteredDataSource}
           columns={columns as any}
           pagination={{ position: ['bottomLeft'] }}
           onChange={(e) => {
