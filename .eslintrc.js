@@ -64,6 +64,7 @@ module.exports = {
     ],
     // 'prettier/prettier': ['error', { singleQuote: true }],
     'prettier/prettier': 'off',
+    'react/jsx-no-bind': 'off',
     'react/jsx-filename-extension': [
       1,
       {
@@ -78,6 +79,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     'no-restricted-globals': 'off',
     'no-case-declarations': 'off',
+    'no-else-return': 'off',
   },
   settings: {
     'import/resolver': {

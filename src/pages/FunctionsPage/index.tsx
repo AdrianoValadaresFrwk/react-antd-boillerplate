@@ -7,7 +7,7 @@ import {
   Divider,
   Form,
   Tooltip,
-  Modal,
+  message,
 } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -16,6 +16,7 @@ import {
   DeleteOutlined,
   EditOutlined,
 } from '@ant-design/icons';
+import CreateEditFunctionsModal from './modal';
 import { dataSource } from '../AccessProfilePage/MockedData';
 import { TableComponent } from '../AccessProfilePage/styles';
 import { theme } from '../../styles/theme';
@@ -26,9 +27,11 @@ const { Search } = Input;
 
 export default function FunctionsPage() {
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
+  const [selectedItem, setSelectedItem] = useState<any>(null);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [editMode, setEditMode] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const [tableSource, setTableSource] = useState<any>(dataSource);
   const navigate = useNavigate();
   const columns = [
     {
@@ -51,15 +54,22 @@ export default function FunctionsPage() {
       dataIndex: 'actions',
       key: 'actions',
       align: 'center',
-      render: () => (
+      render: (value, record, index) => (
         <div className="action-icons">
           <Tooltip title="Editar">
             <EditOutlined
               style={{ fontSize: '20px' }}
               onClick={() => {
-                console.log('Editar', selectedIndex);
-                console.log(dataSource[selectedIndex]);
+                const idx = record.cod - 1;
+                console.log('Editar', idx);
+                // console.log(tableSource[idx]);
                 setEditMode(true);
+                setSelectedItem(() => {
+                  return {
+                    ...tableSource[idx],
+                    tableIdx: idx,
+                  };
+                });
                 showModal();
               }}
             />
@@ -73,15 +83,37 @@ export default function FunctionsPage() {
     setModalVisible(true);
   }
 
-  function handleOk() {
+  function handleOk(value?: any) {
     setLoading(true);
     setTimeout(() => {
+      setTableSource((oldDataSource) => {
+        if (editMode) {
+          tableSource[value.cod - 1] = value;
+          return [...tableSource];
+        } else {
+          return [
+            ...oldDataSource,
+            {
+              ...value,
+              cod: tableSource.length + 1,
+              key: (tableSource.length + 1).toString(),
+            },
+          ];
+        }
+      });
       setLoading(false);
       setModalVisible(false);
+      setEditMode(false);
+      message.success(
+        editMode
+          ? 'Função atualizada com sucesso'
+          : 'Função cadastrada com sucesso'
+      );
     }, 3000);
   }
 
   function handleCancel() {
+    setEditMode(false);
     setModalVisible(false);
   }
 
@@ -180,88 +212,18 @@ export default function FunctionsPage() {
               </div>
             </Form.Item>
           </Form>
-          <Modal
-            title={<h2> {editMode ? 'Editar Função' : 'Nova Função'}</h2>}
-            centered
+          <CreateEditFunctionsModal
+            editMode={editMode}
+            loading={loading}
+            onCancel={handleCancel}
+            onSubmit={handleOk}
+            setModalVisible={setModalVisible}
             visible={modalVisible}
-            onOk={() => setModalVisible(false)}
-            onCancel={() => setModalVisible(false)}
-            wrapClassName="app-modal"
-            footer={[
-              <Button
-                key="back"
-                shape="round"
-                type="ghost"
-                onClick={() => handleCancel()}
-              >
-                Cancelar
-              </Button>,
-              <Button
-                key="submit"
-                type="primary"
-                shape="round"
-                loading={loading}
-                onClick={() => handleOk()}
-              >
-                {editMode ? 'Salvar' : 'Cadastrar'}
-              </Button>,
-            ]}
-          >
-            <Form
-              name="basic"
-              labelCol={{ span: 24 }}
-              wrapperCol={{ span: 24 }}
-              initialValues={{ remember: true }}
-              onFinish={(e) => {
-                console.log('finish', e);
-              }}
-              onFinishFailed={(e) => {
-                console.log('fail', e);
-              }}
-              autoComplete="off"
-            >
-              <Form.Item
-                label="Código"
-                name="code"
-                rules={[
-                  { required: true, message: 'Please input your username!' },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-
-              <Form.Item
-                label="Descrição"
-                name="description"
-                rules={[
-                  { required: true, message: 'Please input your username!' },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-
-              {/* <Form.Item>
-              <div className="d-flex" style={{ justifyContent: 'end' }}>
-                <Button type="primary" shape="round" htmlType="submit">
-                  Pesquisar
-                </Button>
-                <Button
-                  type="primary"
-                  shape="round"
-                  style={{ marginLeft: 24 }}
-                  onClick={() => {
-                    showModal();
-                  }}
-                >
-                  Novo
-                </Button>
-              </div>
-            </Form.Item> */}
-            </Form>
-          </Modal>
+            editData={selectedItem}
+          />
         </div>
         <TableComponent
-          dataSource={dataSource}
+          dataSource={tableSource}
           columns={columns as any}
           pagination={{ position: ['bottomLeft'] }}
           onChange={(e) => {

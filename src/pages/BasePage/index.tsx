@@ -115,7 +115,7 @@ const BasePage = () => {
             <Link to="/access-profiles"> Perfis de Acesso</Link>
           </Menu.Item> */}
           <SubMenu key="sub10" icon={<MailOutlined />} title="Cadastro">
-            <Menu.Item key="a2">
+            <Menu.Item key="a2" icon={<MailOutlined />}>
               <Popover
                 placement="right"
                 content={administrationMenu}

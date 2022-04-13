@@ -121,6 +121,12 @@ const GlobalStyle = createGlobalStyle`
     background-color: ${theme.background};
   }
 }
+.ant-descriptions-item-label{
+  color: ${theme.secondary};
+}
+.ant-descriptions-item-content{ 
+  color: ${theme.gray};
+}
 `;
 
 export default GlobalStyle;
