@@ -80,6 +80,7 @@ module.exports = {
     'no-restricted-globals': 'off',
     'no-case-declarations': 'off',
     'no-else-return': 'off',
+    'prefer-promise-reject-errors': 'off',
   },
   settings: {
     'import/resolver': {

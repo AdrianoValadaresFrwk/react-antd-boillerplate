@@ -11,6 +11,7 @@ import { theme } from '../../styles/theme';
 import { dataSource } from './MockedData';
 import { TableComponent } from './styles';
 import { HeaderButton, HeaderUserName } from '../BasePage/styles';
+import AppHeader from '../../components/Header';
 
 const { Header, Content } = Layout;
 const { Search } = Input;
@@ -56,36 +57,7 @@ export default function AccessProfilePage() {
 
   return (
     <Layout className="site-layout">
-      <Header
-        className="d-flex justify-content-between align-items-center"
-        style={{ backgroundColor: theme.background }}
-      >
-        <div className="d-flex justify-content-center align-items-center">
-          <Avatar icon={<UserOutlined />} />
-          <HeaderUserName>User Name</HeaderUserName>
-          <DownOutlined
-            style={{ fontSize: '16px', color: `${theme.primary}` }}
-          />
-        </div>
-        <div className="d-flex justify-content-center align-items-center mx-2">
-          <Search
-            placeholder="Search"
-            onSearch={(e) => {
-              console.log(e);
-            }}
-            style={{ width: 352, marginRight: 64 }}
-          />
-          <HeaderButton
-            shape="round"
-            type="primary"
-            onClick={() => {
-              navigate('/new-quotation');
-            }}
-          >
-            Nova Cotação
-          </HeaderButton>
-        </div>
-      </Header>
+      <AppHeader />
       <Content
         style={{
           padding: '16px 36px',
@@ -96,7 +68,7 @@ export default function AccessProfilePage() {
         className="d-flex flex-column"
       >
         <div>
-          <h2>Pesquisar Perfil </h2>
+          <h2 style={{ color: theme.secondary }}>Pesquisar Perfil </h2>
           <Divider />
           <Form
             name="basic"

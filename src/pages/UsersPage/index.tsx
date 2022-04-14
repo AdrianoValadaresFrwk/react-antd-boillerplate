@@ -10,18 +10,25 @@ import {
   message,
 } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import { UserOutlined, DownOutlined, EditOutlined } from '@ant-design/icons';
-import CreateEditFunctionsModal from './modal';
-import { dataSource } from '../AccessProfilePage/MockedData';
+import {
+  UserOutlined,
+  DownOutlined,
+  EditOutlined,
+  HistoryOutlined,
+  SettingOutlined,
+} from '@ant-design/icons';
+import CreateEditUsersModal from './modal';
+import { dataSource } from './MockedData';
 import { TableComponent } from '../AccessProfilePage/styles';
 import { theme } from '../../styles/theme';
 import { HeaderButton, HeaderUserName } from '../BasePage/styles';
 import AppHeader from '../../components/Header';
 
-const { Header, Content } = Layout;
+// const { Header, Content } = Layout;
+const { Content } = Layout;
 const { Search } = Input;
 
-export default function FunctionsPage() {
+export default function UsersPage() {
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const [selectedItem, setSelectedItem] = useState<any>(null);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
@@ -36,17 +43,17 @@ export default function FunctionsPage() {
       key: 'cod',
     },
     {
-      title: 'Descrição',
-      dataIndex: 'description',
-      key: 'description',
+      title: 'Nome',
+      dataIndex: 'name',
+      key: 'name',
     },
     {
-      title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
+      title: 'Perfil de Acesso',
+      dataIndex: 'accessProfile',
+      key: 'accessProfile',
     },
     {
-      title: ' ',
+      title: '',
       dataIndex: 'actions',
       key: 'actions',
       align: 'center',
@@ -69,6 +76,12 @@ export default function FunctionsPage() {
                 showModal();
               }}
             />
+          </Tooltip>
+          <Tooltip title="Historico">
+            <HistoryOutlined style={{ fontSize: '20px' }} />
+          </Tooltip>
+          <Tooltip title="Restaurar senha">
+            <SettingOutlined style={{ fontSize: '20px' }} />
           </Tooltip>
         </div>
       ),
@@ -102,8 +115,8 @@ export default function FunctionsPage() {
       setEditMode(false);
       message.success(
         editMode
-          ? 'Função atualizada com sucesso'
-          : 'Função cadastrada com sucesso'
+          ? 'Usuário atualizado com sucesso'
+          : 'Usuário cadastrado com sucesso'
       );
     }, 3000);
   }
@@ -126,7 +139,7 @@ export default function FunctionsPage() {
         className="d-flex flex-column"
       >
         <div>
-          <h2 style={{ color: theme.secondary }}>Pesquisar Funções </h2>
+          <h2 style={{ color: theme.secondary }}>Pesquisar Usuários </h2>
           <Divider />
           <Form
             name="basic"
@@ -142,20 +155,13 @@ export default function FunctionsPage() {
             autoComplete="off"
           >
             <Form.Item
-              label="Código"
-              name="code"
+              label="Nome"
+              name="name"
               rules={[
-                { required: true, message: 'Please input your username!' },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-
-            <Form.Item
-              label="Descrição"
-              name="description"
-              rules={[
-                { required: true, message: 'Please input your username!' },
+                {
+                  required: true,
+                  message: 'Por favor, informe um nome de usuário!',
+                },
               ]}
             >
               <Input />
@@ -179,7 +185,7 @@ export default function FunctionsPage() {
               </div>
             </Form.Item>
           </Form>
-          <CreateEditFunctionsModal
+          <CreateEditUsersModal
             editMode={editMode}
             loading={loading}
             onCancel={handleCancel}

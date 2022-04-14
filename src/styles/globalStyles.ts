@@ -119,6 +119,8 @@ const GlobalStyle = createGlobalStyle`
   }
   .ant-modal-body{
     background-color: ${theme.background};
+    max-height: 600px;
+    overflow-y: auto;
   }
 }
 .ant-descriptions-item-label{
