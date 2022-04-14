@@ -18,6 +18,8 @@ export default function ExecuteGuard(rule: string, params?: any): JSX.Element {
       return <FunctionsPage />;
     case '/users':
       return <UsersPage />;
+    case '/cities':
+      return <>Cidades</>;
 
     default:
       console.log('executeGuard');

@@ -32,6 +32,10 @@ const RouterObject = (logged: boolean, token: string): RouteObject[] => [
         path: '/users',
         element: ExecuteGuard('/users', ''),
       },
+      {
+        path: '/cities',
+        element: ExecuteGuard('/cities', ''),
+      },
     ],
   },
   { path: 'login', element: <Login /> },
