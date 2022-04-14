@@ -1,0 +1,42 @@
+export const dataSource = [
+  {
+    key: '1',
+    cod: 1,
+    description: 'São Paulo',
+    status: 'Ativo',
+    country: 'Brasil',
+    state: 'São Paulo',
+  },
+  {
+    key: '2',
+    cod: 2,
+    description: 'Belo Horizonte',
+    status: 'Ativo',
+    country: 'Brasil',
+    state: 'Minas Gerais',
+  },
+  {
+    key: '3',
+    cod: 3,
+    description: 'Rio de Janeiro',
+    status: 'Ativo',
+    country: 'Brasil',
+    state: 'Rio de Janeiro',
+  },
+  {
+    key: '4',
+    cod: 4,
+    description: 'Curitiba',
+    status: 'Ativo',
+    country: 'Brasil',
+    state: 'Paraná',
+  },
+  {
+    key: '5',
+    cod: 5,
+    description: 'Fortaleza',
+    status: 'Ativo',
+    country: 'Brasil',
+    state: 'Ceará',
+  },
+];
