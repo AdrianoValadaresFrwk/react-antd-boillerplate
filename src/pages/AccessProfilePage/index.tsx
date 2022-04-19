@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Layout, Button, Input, Avatar, Divider, Form } from 'antd';
+import { Layout, Button, Input, Avatar, Divider, Form, Tooltip } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import {
   UserOutlined,
@@ -59,22 +59,27 @@ export default function AccessProfilePage() {
       title: ' ',
       dataIndex: 'actions',
       key: 'actions',
+      align: 'center',
       render: () => (
         <div className="action-icons">
-          <EditOutlined
-            style={{ fontSize: '20px' }}
-            onClick={() => {
-              console.log('Editar', selectedIndex);
-              console.log(dataSource[selectedIndex]);
-            }}
-          />
-          <DeleteOutlined
-            style={{ fontSize: '20px' }}
-            onClick={() => {
-              console.log('Excluir', selectedIndex);
-              console.log(dataSource[selectedIndex]);
-            }}
-          />
+          <Tooltip title="Editar">
+            <EditOutlined
+              style={{ fontSize: '20px' }}
+              onClick={() => {
+                console.log('Editar', selectedIndex);
+                console.log(dataSource[selectedIndex]);
+              }}
+            />
+          </Tooltip>
+          <Tooltip title="Deletar">
+            <DeleteOutlined
+              style={{ fontSize: '20px' }}
+              onClick={() => {
+                console.log('Excluir', selectedIndex);
+                console.log(dataSource[selectedIndex]);
+              }}
+            />
+          </Tooltip>
         </div>
       ),
     },
@@ -143,7 +148,7 @@ export default function AccessProfilePage() {
               label="Código"
               name="code"
               rules={[
-                { required: false, message: 'Please input your username!' },
+                { required: false, message: 'Por favor, informar um código!' },
               ]}
             >
               <Input />
@@ -153,7 +158,7 @@ export default function AccessProfilePage() {
               label="Descrição"
               name="description"
               rules={[
-                { required: false, message: 'Please input your username!' },
+                { required: false, message: 'Por favor, informar uma descrição!' },
               ]}
             >
               <Input />
