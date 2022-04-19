@@ -64,6 +64,7 @@ module.exports = {
     ],
     // 'prettier/prettier': ['error', { singleQuote: true }],
     'prettier/prettier': 'off',
+    'react/jsx-no-bind': 'off',
     'react/jsx-filename-extension': [
       1,
       {
