@@ -64,7 +64,7 @@ const BasePage = () => {
           </Menu.Item>
         </SubMenu>
         <Menu.Item key="/cities" icon={<FileOutlined />}>
-          <Link to="/">Cidade</Link>
+          <Link to="/cities">Cidade</Link>
         </Menu.Item>
         <Menu.Item key="/functions" icon={<FileOutlined />}>
           <Link to="/functions">Funções</Link>
