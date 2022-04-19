@@ -79,6 +79,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     'no-restricted-globals': 'off',
     'no-case-declarations': 'off',
+    'no-else-return': 'off',
   },
   settings: {
     'import/resolver': {
