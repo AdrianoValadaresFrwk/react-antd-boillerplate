@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Layout, Button, Input, Avatar, Divider, Form } from 'antd';
+import { useMemo, useState } from 'react';
+import { Layout, Button, Input, Avatar, Divider, Form, Tooltip } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import {
   UserOutlined,
@@ -7,6 +7,7 @@ import {
   DeleteOutlined,
   EditOutlined,
 } from '@ant-design/icons';
+import Modal from './Modal';
 import { theme } from '../../styles/theme';
 import { dataSource } from './MockedData';
 import { TableComponent } from './styles';
@@ -18,6 +19,31 @@ const { Search } = Input;
 
 export default function AccessProfilePage() {
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
+  const [codSearch, setCodSearch] = useState<string>('');
+  const [descSearch, setDescSearch] = useState<string>('');
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+
+
+  const filteredDataSource = useMemo(() => dataSource.filter((item) => {
+    const cod = item.cod.toString().includes(codSearch);
+    const desc = item.description?.toLowerCase().includes(descSearch?.toLowerCase());
+    return cod || desc;
+  }), [dataSource, codSearch, descSearch]);
+
+
+  function showModal () {
+    setIsModalVisible(true);
+  };
+
+    
+  function handleOk () {
+    setIsModalVisible(false);
+  };
+
+  function handleCancel () {
+    setIsModalVisible(false);
+  };
+
   const navigate = useNavigate();
   const columns = [
     {
@@ -34,26 +60,32 @@ export default function AccessProfilePage() {
       title: ' ',
       dataIndex: 'actions',
       key: 'actions',
+      align: 'center',
       render: () => (
         <div className="action-icons">
-          <EditOutlined
-            style={{ fontSize: '20px' }}
-            onClick={() => {
-              console.log('Editar', selectedIndex);
-              console.log(dataSource[selectedIndex]);
-            }}
-          />
-          <DeleteOutlined
-            style={{ fontSize: '20px' }}
-            onClick={() => {
-              console.log('Excluir', selectedIndex);
-              console.log(dataSource[selectedIndex]);
-            }}
-          />
+          <Tooltip title="Editar">
+            <EditOutlined
+              style={{ fontSize: '20px' }}
+              onClick={() => {
+                console.log('Editar', selectedIndex);
+                console.log(dataSource[selectedIndex]);
+              }}
+            />
+          </Tooltip>
+          <Tooltip title="Deletar">
+            <DeleteOutlined
+              style={{ fontSize: '20px' }}
+              onClick={() => {
+                console.log('Excluir', selectedIndex);
+                console.log(dataSource[selectedIndex]);
+              }}
+            />
+          </Tooltip>
         </div>
       ),
     },
   ];
+
 
   return (
     <Layout className="site-layout">
@@ -76,7 +108,8 @@ export default function AccessProfilePage() {
             wrapperCol={{ span: 24 }}
             initialValues={{ remember: true }}
             onFinish={(e) => {
-              console.log('finish', e);
+              setCodSearch(e.code);
+              setDescSearch(e.description);
             }}
             onFinishFailed={(e) => {
               console.log('fail', e);
@@ -87,7 +120,7 @@ export default function AccessProfilePage() {
               label="Código"
               name="code"
               rules={[
-                { required: true, message: 'Please input your username!' },
+                { required: false, message: 'Por favor, informar um código!' },
               ]}
             >
               <Input />
@@ -97,7 +130,7 @@ export default function AccessProfilePage() {
               label="Descrição"
               name="description"
               rules={[
-                { required: true, message: 'Please input your username!' },
+                { required: false, message: 'Por favor, informar uma descrição!' },
               ]}
             >
               <Input />
@@ -108,15 +141,20 @@ export default function AccessProfilePage() {
                 <Button type="primary" shape="round" htmlType="submit">
                   Pesquisar
                 </Button>
-                <Button type="primary" shape="round" style={{ marginLeft: 24 }}>
+                <Button type="primary" shape="round" style={{ marginLeft: 24 }} onClick={showModal}>
                   Novo
                 </Button>
               </div>
             </Form.Item>
           </Form>
+          <Modal
+          visible={isModalVisible}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          />
         </div>
         <TableComponent
-          dataSource={dataSource}
+          dataSource={filteredDataSource}
           columns={columns as any}
           pagination={{ position: ['bottomLeft'] }}
           onChange={(e) => {
