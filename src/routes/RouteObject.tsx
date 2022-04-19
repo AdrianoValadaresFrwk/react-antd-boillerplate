@@ -10,7 +10,6 @@ const Login = lazy(() => import('../pages/Login'));
 const RouterObject = (logged: boolean, token: string): RouteObject[] => [
   {
     path: '/',
-    // element: logged || token ? <BasePage /> : <Navigate to="login" />,
     element: ExecuteGuard('/', { logged, token }),
     children: [
       {
@@ -19,7 +18,6 @@ const RouterObject = (logged: boolean, token: string): RouteObject[] => [
       },
       {
         path: '/new-quotation',
-        // element: <Painel />,
         element: <NewQuotationPage />,
       },
       {
@@ -29,6 +27,10 @@ const RouterObject = (logged: boolean, token: string): RouteObject[] => [
       {
         path: '/functions',
         element: ExecuteGuard('/functions', ''),
+      },
+      {
+        path: '/users',
+        element: ExecuteGuard('/users', ''),
       },
     ],
   },

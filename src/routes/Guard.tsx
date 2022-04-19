@@ -5,6 +5,7 @@ const BasePage = lazy(() => import('../pages/BasePage'));
 const Painel = lazy(() => import('../pages/Panel'));
 const AccessProfilePage = lazy(() => import('../pages/AccessProfilePage'));
 const FunctionsPage = lazy(() => import('../pages/FunctionsPage'));
+const UsersPage = lazy(() => import('../pages/UsersPage'));
 
 export default function ExecuteGuard(rule: string, params?: any): JSX.Element {
   switch (rule) {
@@ -15,6 +16,8 @@ export default function ExecuteGuard(rule: string, params?: any): JSX.Element {
       return <AccessProfilePage />;
     case '/functions':
       return <FunctionsPage />;
+    case '/users':
+      return <UsersPage />;
 
     default:
       console.log('executeGuard');

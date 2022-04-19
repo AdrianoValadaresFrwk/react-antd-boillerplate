@@ -60,7 +60,7 @@ const BasePage = () => {
             <Link to="/access-profiles">Perfis de Acesso</Link>
           </Menu.Item>
           <Menu.Item key="/users" icon={<FileOutlined />}>
-            <Link to="/">Usuários</Link>
+            <Link to="/users">Usuários</Link>
           </Menu.Item>
         </SubMenu>
         <Menu.Item key="/cities" icon={<FileOutlined />}>
@@ -131,7 +131,7 @@ const BasePage = () => {
           </SubMenu>
         </Menu>
       </Sider>
-      <Suspense fallback={<div />}>
+      <Suspense fallback={<div>Loading page...</div>}>
         <Outlet />
       </Suspense>
     </Layout>
